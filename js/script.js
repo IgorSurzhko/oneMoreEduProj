@@ -101,12 +101,16 @@ window.addEventListener('DOMContentLoaded', () => {
 		  modalCloseBtn = document.querySelector('[data-close]');
 
 	modalTrigger.forEach(btn => {
-		btn.addEventListener('click', () => {
-			modal.classList.add('show');			// добавляем стиль из ЦСС, там он прописан, меняет display block/none
-			modal.classList.remove('hide');
-			document.body.style.overflow = 'hidden'; //убрать прокрутку страницы за модальным окном
-		}); 	
+		btn.addEventListener('click', openModal); 	
 	});	  
+
+	function openModal() {
+		modal.classList.add('show');			// добавляем стиль из ЦСС, там он прописан, меняет display block/none
+		modal.classList.remove('hide');
+		document.body.style.overflow = 'hidden'; //убрать прокрутку страницы за модальным окном
+		clearInterval(modalTimerId);  
+		// пользователь сам открыл модальное окно-должны вырубить таймер и не показывать еще раз окно через modalTimerId
+	}
 
 	function closeModal() {
 		modal.classList.add('hide');
@@ -125,11 +129,21 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-
+					// закрыть модальное окно при нажатии esc 
 	document.addEventListener('keydown', (e) => {
 		if (e.code === "Escape" && modal.classList.contains('show')) {
 			closeModal();
 		}
 	});
 
+	const modalTimerId = setTimeout(openModal, 50000); // через 5 секунд показать пользователю модальное окно
+
+	function showModalByScroll() {
+		if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+			openModal();
+			window.removeEventListener('scroll', showModalByScroll);
+		}
+	} 	
+	window.addEventListener('scroll', showModalByScroll);
+				 // показывать один раз модальное окно при прокрутке до конца страницы
 });
