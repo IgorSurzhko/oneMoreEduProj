@@ -257,6 +257,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				if (request.status === 200) {
 					console.log(request.response);
 					statusMessage.textContent = message.success; // сообщение из массива выше
+					form.reset(); // очищаем форму
+					setTimeout(() => {    //таймер удаления сообщения после выполнения
+						statusMessage.remove();
+					}, 2000); 
 				} else {
 					statusMessage.textContent = message.failure; // сообщение неудачи
 				}
