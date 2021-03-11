@@ -131,8 +131,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			closeModal();
 		}
 	});
-	//!!!!!!!!!!!!!!!!!!!
-	// const modalTimerId = setTimeout(openModal, 50000); // через 5 секунд показать пользователю модальное окно
+		const modalTimerId = setTimeout(openModal, 50000); // через 5 секунд показать пользователю модальное окно
 
 	function showModalByScroll() {
 		if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
@@ -224,7 +223,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const forms = document.querySelectorAll('form');
 
 	const message = {
-		loading: 'Загрузка',
+		loading: 'img/form/spinner.svg',
 		success: 'Спасибо, скоро мы к вам вернемся',
 		failure: 'Шо-та ваще умерло'
 	};
@@ -237,9 +236,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		form.addEventListener('submit', (e) => {
 			e.preventDefault(); // отмена ребута страницы
 
-			const statusMessage = document.createElement('div'); //
-			statusMessage.classList.add('status'); // вывод сообщения из массива message
-			statusMessage.textContent = message.loading; //
+			const statusMessage = document.createElement('img'); //
+			statusMessage.src = message.loading; // вывод спиннера загрузки из массива message
+			statusMessage.style.cssText = `
+				display: block;
+				margin: 0 auto;
+			`; // доабвили ЦСС стили для спинера, инлайн стили
 			form.append(statusMessage); //
 
 			const request = new XMLHttpRequest();
