@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/IgorSurzhko/jsOneMoreEduProj#readme",
   "devDependencies": {
+    "css-minimizer-webpack-plugin": "^1.3.0",
     "json-server": "^0.16.3",
     "webpack": "^5.26.1",
     "webpack-cli": "^4.5.0"
-  }
+  },
+  "dependencies": {}
 }

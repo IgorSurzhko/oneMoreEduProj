@@ -1,4 +1,6 @@
-function forms() {
+import {closeModal, openModal} from './modal';
+
+function forms(modalTimerId) {
     // FORMS, here Am working with OPEN_SERVER (localhost)
 
     const forms = document.querySelectorAll('form');
@@ -61,7 +63,7 @@ function forms() {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
         prevModalDialog.classList.add('hide');
-        openModal(); // открываем новую модалку
+        openModal('.modal', modalTimerId); // открываем новую модалку
 
         const thanksModal = document.createElement('div'); //формирование верстки новой модалки
         thanksModal.classList.add('modal__dialog');
@@ -78,11 +80,11 @@ function forms() {
             thanksModal.remove();
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
-            closeModal();
+            closeModal('.modal');
         }, 4000);
     }
 
 
 }
 
-module.exports = forms;
+export default forms;
